@@ -1,0 +1,15 @@
+{
+    "name": "identityonly/identity-common",
+    "description": "Common resources for IdentityOnly",
+    "authors": [
+        {
+            "name": "Justin Martin",
+            "email": "frozenfire@thefrozenfire.com"
+        }
+    ],
+    "type": "zend-module",
+    "require": {
+        "composer/installers": "~1.0",
+        "doctrine/doctrine-orm-module": "~0.7.0"
+    }
+}
