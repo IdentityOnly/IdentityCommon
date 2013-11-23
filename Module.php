@@ -17,6 +17,22 @@ class Module
     {
         return include __DIR__ . '/config/module.config.php';
     }
+    
+    public function getServiceConfig() {
+        return array(
+            'aliases' => array(
+                'IdentityCommon\EntityManager' => 'doctrine.entitymanager.identity'
+            ),
+            'factories' => array(
+                'doctrine.entitymanager.identity' => new \DoctrineORMModule\Service\EntityManagerFactory('identity'),
+                'doctrine.connection.identity' => new \DoctrineORMModule\Service\DBALConnectionFactory('identity'),
+                'doctrine.configuration.identity' => new \DoctrineORMModule\Service\ConfigurationFactory('identity'),
+                'doctrine.driver.identity' => new \DoctrineModule\Service\DriverFactory('identity'),
+                'doctrine.eventmanager.identity' => new \DoctrineModule\Service\EventManagerFactory('identity'),
+                'doctrine.entity_resolver.identity' => new \DoctrineORMModule\Service\EntityResolverFactory('identity'),
+            )
+        );
+    }
 
     public function getAutoloaderConfig()
     {

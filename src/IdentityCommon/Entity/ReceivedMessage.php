@@ -3,6 +3,10 @@ namespace IdentityCommon\Entity;
 
 use DateTime;
 
+use Doctrine\ORM\Mapping as ORM;
+/**
+ * @ORM\Entity
+ */
 class ReceivedMessage extends AbstractEntity
 {
     /**
