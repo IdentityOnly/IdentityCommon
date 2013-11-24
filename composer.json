@@ -16,6 +16,8 @@
     "type": "zend-module",
     "require": {
         "composer/installers": "~1.0",
-        "doctrine/doctrine-orm-module": "~0.7.0"
+        "doctrine/doctrine-orm-module": "~0.7.0",
+        "zf-commons/zfc-user-doctrine-orm": "~0.1.1",
+        "bjyoungblood/bjy-authorize": "~1.4.0"
     }
 }
