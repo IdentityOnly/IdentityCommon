@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ReceivedMessage extends AbstractEntity
 {
+    const ERROR_NO_USER = 401;
     const ERROR_PROCESSOR_NOT_FOUND = 404;
     const ERROR_FAILED_PROCESSING = 500;
 

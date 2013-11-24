@@ -28,7 +28,7 @@ class User implements UserInterface, ProviderInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string", unique=true, length=255, nullable=true)
+     * @ORM\Column(type="string", unique=true, length=255)
      */
     protected $email;
 
@@ -43,6 +43,12 @@ class User implements UserInterface, ProviderInterface
      * @ORM\Column(type="string", length=128)
      */
     protected $password;
+    
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="IdentityCommon\Entity\User\PublicKey", mappedBy="user", cascade={"all"})
+     */
+    protected $publicKeys;
 
     /**
      * @var int
@@ -62,7 +68,8 @@ class User implements UserInterface, ProviderInterface
 
     public function __construct()
     {
-        $this->roles = new ArrayCollection();
+        $this->setRoles(new ArrayCollection);
+        $this->setPublicKeys(new ArrayCollection);
     }
 
     public function getId()
@@ -113,6 +120,15 @@ class User implements UserInterface, ProviderInterface
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+    
+    public function getPublicKeys() {
+        return $this->publicKeys;
+    }
+    
+    public function setPublicKeys($publicKeys) {
+        $this->publicKeys = $publicKeys;
+        return $this;
     }
 
     public function getState()
