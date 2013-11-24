@@ -1,6 +1,7 @@
 <?php
 namespace IdentityCommon\Entity;
 
+use Zend\Mail\Message;
 use DateTime;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ReceivedMessage extends AbstractEntity
 {
+    const ERROR_PROCESSOR_NOT_FOUND = 404;
+    const ERROR_FAILED_PROCESSING = 500;
+
     /**
      * @var int
      * @ORM\Id
@@ -28,6 +32,12 @@ class ReceivedMessage extends AbstractEntity
      * @ORM\Column(type="boolean")
      */
     protected $processed;
+    
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    protected $errorCode;
 
     /**
      * @var string
@@ -38,6 +48,13 @@ class ReceivedMessage extends AbstractEntity
     public function __construct() {
         $this->setCreated(new DateTime);
         $this->setProcessed(false);
+    }
+    
+    public function getMessage() {
+        if(!($content = $this->getContent())) {
+            return null;
+        }
+        return Message::fromString($content);
     }
     
     public function getId() {
@@ -64,6 +81,15 @@ class ReceivedMessage extends AbstractEntity
     
     public function setProcessed($processed) {
         $this->processed = $processed;
+        return $this;
+    }
+    
+    public function getErrorCode() {
+        return $this->errorCode;
+    }
+    
+    public function setErrorCode($errorCode) {
+        $this->errorCode = $errorCode;
         return $this;
     }
     
